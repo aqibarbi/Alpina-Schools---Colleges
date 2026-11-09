@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpina School &amp; Colleges Bahawalpur Pakistan</title>
+  <meta name="description" content="Alpina Schools & Colleges, Bahawalpur. Building confident, capable and principled learners since 1983.">
+
+  <!-- Fonts: Poppins for headings, Inter for text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind (CDN is fine for practice work), then our settings, then our own css -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="tailwind-config.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-snow text-ink font-body antialiased">
+
+  <div id="top-strip" class="hidden md:block bg-brand text-white text-xs"></div>
+  <header id="site-header" class="sticky top-0 z-40"></header>
+
+  <main>
+
+    <!-- HERO SLIDER: 3 photos from the old site. Slide text is the old site's own copy -->
+    <section id="slider" class="relative h-[36rem] lg:h-[40rem] overflow-hidden bg-deep" aria-roledescription="carousel" aria-label="Alpina highlights">
+
+      <!-- Slide 1 -->
+      <div data-slide class="slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3">
+        <img src="images/slide-1.webp" alt="Alpina School sign, Boys Branch" fetchpriority="high" class="absolute inset-0 w-full h-full object-cover">
+        <div class="slide-shade absolute inset-0"></div>
+        <div class="relative max-w-6xl mx-auto h-full px-6 flex items-center">
+          <div class="max-w-xl text-white pb-24">
+            <h1 class="font-display font-semibold text-3xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight">Building Confident, Capable &amp; Principled Learners &mdash; Since 1983</h1>
+            <p class="mt-4 sm:mt-6 text-base leading-7 sm:text-lg sm:leading-8 text-white/90">A trusted network of schools and colleges delivering academic excellence, character development, and global pathways.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div data-slide class="slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+        <img src="images/slide-2.webp" alt="Nursery B students holding apple cut-outs" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
+        <div class="slide-shade absolute inset-0"></div>
+        <div class="relative max-w-6xl mx-auto h-full px-6 flex items-center">
+          <div class="max-w-xl text-white pb-24">
+            <h2 class="font-display font-semibold text-3xl sm:text-5xl leading-[1.1] tracking-tight">Begin the Alpina Journey</h2>
+            <p class="mt-4 sm:mt-6 text-base leading-7 sm:text-lg sm:leading-8 text-white/90">Choosing the right school is an important decision. We invite you to visit our campuses, meet our team, and experience the Alpina learning environment first-hand.</p>
+            <a href="page.html?id=86" class="inline-block mt-6 sm:mt-8 bg-white text-brand font-semibold px-6 py-3 rounded-full hover:bg-glacier smooth">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div data-slide class="slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+        <img src="images/slide-3.webp" alt="Three girls in butterfly costumes" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
+        <div class="slide-shade absolute inset-0"></div>
+        <div class="relative max-w-6xl mx-auto h-full px-6 flex items-center">
+          <div class="max-w-xl text-white pb-24">
+            <h2 class="font-display font-semibold text-3xl sm:text-5xl leading-[1.1] tracking-tight">Life Beyond the Classroom</h2>
+            <p class="mt-4 sm:mt-6 text-base leading-7 sm:text-lg sm:leading-8 text-white/90">Education at Alpina extends beyond academics. Through debates, sports, cultural activities, leadership opportunities, and community service, students develop confidence, communication, and responsibility.</p>
+            <a href="page.html?id=109" class="inline-block mt-6 sm:mt-8 bg-white text-brand font-semibold px-6 py-3 rounded-full hover:bg-glacier smooth">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slider controls: dots on the left, pause and arrows on the right -->
+      <div class="absolute inset-x-0 bottom-24 lg:bottom-32 z-20">
+        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+          <div class="flex items-center gap-2" role="group" aria-label="Choose a slide">
+            <button data-dot class="dot" aria-label="Go to slide 1" aria-current="true"></button>
+            <button data-dot class="dot" aria-label="Go to slide 2" aria-current="false"></button>
+            <button data-dot class="dot" aria-label="Go to slide 3" aria-current="false"></button>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="slider-pause" class="px-4 h-11 rounded-full bg-white text-brand text-sm font-semibold hover:bg-glacier smooth">Pause</button>
+            <button id="slider-prev" class="w-11 h-11 rounded-full bg-white text-brand text-xl hover:bg-glacier smooth" aria-label="Previous slide">&lsaquo;</button>
+            <button id="slider-next" class="w-11 h-11 rounded-full bg-white text-brand text-xl hover:bg-glacier smooth" aria-label="Next slide">&rsaquo;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ridge. Back layer is light blue, front layer is logo blue and joins the stats bar -->
+      <svg class="absolute bottom-0 left-0 w-full h-20 lg:h-28 z-10 pointer-events-none" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+        <path style="fill: var(--glacier)" d="M0 160V90L180 30 300 80 470 10 650 85 820 40 1010 95 1200 25 1330 70 1440 45V160Z"/>
+        <path style="fill: var(--brand)" d="M0 160V120L140 80 290 115 460 60 640 118 840 75 1030 122 1230 70 1440 110V160Z"/>
+      </svg>
+    </section>
+
+    <!-- STATS -->
+    <section class="bg-brand text-white">
+      <div class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div><p class="font-display font-semibold text-4xl"><span data-count="5">0</span>+</p><p class="mt-1 text-white/80">Branches</p></div>
+        <div><p class="font-display font-semibold text-4xl"><span data-count="9">0</span>+</p><p class="mt-1 text-white/80">Awards Won</p></div>
+        <div><p class="font-display font-semibold text-4xl"><span data-count="100">0</span>+</p><p class="mt-1 text-white/80">Skilled Staff</p></div>
+        <div><p class="font-display font-semibold text-4xl"><span data-count="967">0</span>+</p><p class="mt-1 text-white/80">Students</p></div>
+      </div>
+    </section>
+
+    <!-- ACADEMIC PATHWAYS -->
+    <section class="max-w-6xl mx-auto px-6 pt-20">
+      <h2 class="font-display font-semibold text-3xl tracking-tight text-brand">Academic Pathways</h2>
+      <ul class="mt-8 grid md:grid-cols-3 gap-4">
+        <li><a href="page.html?id=104" class="block border-l-4 border-brand bg-surface px-6 py-6 font-display font-semibold text-xl hover:bg-glacier smooth">Pre-Primary</a></li>
+        <li><a href="page.html?id=105" class="block border-l-4 border-brand bg-surface px-6 py-6 font-display font-semibold text-xl hover:bg-glacier smooth">Primary &amp; Middle</a></li>
+        <li><a href="page.html?id=106" class="block border-l-4 border-brand bg-surface px-6 py-6 font-display font-semibold text-xl hover:bg-glacier smooth">Secondary</a></li>
+      </ul>
+    </section>
+
+    <!-- TWO BLOCKS FROM THE OLD HOME PAGE (the other two are now slides) -->
+    <section class="max-w-6xl mx-auto px-6 py-20">
+      <div class="grid md:grid-cols-6 gap-4">
+        <article class="md:col-span-4 bg-surface border border-line rounded-3xl p-8 lg:p-10 lift">
+          <h2 class="font-display font-semibold text-2xl text-brand">What Distinguishes Alpina</h2>
+          <p class="mt-4 text-lg leading-8 text-muted max-w-xl">With over four decades of experience, moderate class sizes, qualified faculty, structured Islamic education, and consistent board results, Alpina offers balance &mdash; not experimentation.</p>
+          <a href="page.html?id=80" class="inline-block mt-6 bg-brand text-white font-medium px-6 py-3 rounded-full hover:bg-deep smooth">Learn More</a>
+        </article>
+
+        <article class="md:col-span-2 bg-glacier rounded-xl p-6 lg:p-8">
+          <h2 class="font-display font-semibold text-xl text-brand">Results and Recognition</h2>
+          <p class="mt-3 text-muted leading-7">Alpina students consistently achieve top positions in Board examinations and distinctions in academic, cultural, and competitive arenas at district and provincial levels.</p>
+          <a href="page.html?id=98" class="inline-block mt-4 font-medium text-brand underline underline-offset-4 hover:bg-surface smooth">Learn More</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABOUT US -->
+    <section class="bg-glacier">
+      <div class="max-w-6xl mx-auto px-6 py-20 grid lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7">
+          <h2 class="font-display font-semibold text-3xl lg:text-4xl tracking-tight text-brand">Our Educational Philosophy</h2>
+          <p class="mt-6 text-lg leading-8 text-muted">Dear Parents,</p>
+          <p class="mt-4 text-lg leading-8 text-muted">We are delighted to welcome you to Alpina Schools &amp; Colleges, an institution with a proud educational legacy spanning more than four decades.</p>
+          <p class="mt-4 text-lg leading-8 text-muted">Since its founding, Alpina has remained firmly committed to academic excellence while placing equal importance on character development, creativity, and the holistic growth of every student. Our purpose is to nurture confident, capable individuals who are intellectually curious, ethically&hellip;</p>
+          <ul class="mt-6 space-y-2 font-medium">
+            <li>Skilled Instructors</li>
+            <li>Creative Approach</li>
+            <li>International Standard</li>
+          </ul>
+          <a href="page.html?id=85" class="inline-block mt-8 bg-brand text-white font-medium px-6 py-3 rounded-full hover:bg-deep smooth">More Information</a>
+        </div>
+        <!-- Image is loaded from the old site -->
+        <img src="https://alpina.edu.pk/img/about-2.png" alt="About Alpina" loading="lazy" class="lg:col-span-5 w-full h-auto rounded-2xl lift">
+      </div>
+    </section>
+
+    <!-- CONTACT US -->
+    <section id="contact" class="max-w-6xl mx-auto px-6 py-20 grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-5">
+        <h2 class="font-display font-semibold text-3xl tracking-tight text-brand">Contact Us</h2>
+        <dl class="mt-6 space-y-5 text-muted">
+          <div><dt class="font-medium text-ink">Address</dt><dd>16-B, Mohammad Hussain Road, Model Town A, Bahawalpur, PAKISTAN</dd></div>
+          <div><dt class="font-medium text-ink">Mail Us</dt><dd><a class="hover:underline" href="mailto:info@alpina.edu.pk">info@alpina.edu.pk</a></dd></div>
+          <div><dt class="font-medium text-ink">Telephone</dt><dd><a class="hover:underline" href="tel:+92622874852">+92 62 2874852</a></dd></div>
+        </dl>
+      </div>
+
+      <form id="contact-form" class="lg:col-span-7 bg-surface border border-line rounded-2xl p-6 lg:p-8 lift grid sm:grid-cols-2 gap-5">
+        <label class="block text-sm font-medium">Full Name *
+          <input type="text" required class="mt-1 w-full rounded-lg border border-line bg-snow px-4 py-3 font-normal smooth">
+        </label>
+        <label class="block text-sm font-medium">Email Address *
+          <input type="email" required class="mt-1 w-full rounded-lg border border-line bg-snow px-4 py-3 font-normal smooth">
+        </label>
+        <label class="block text-sm font-medium">Phone Number
+          <input type="tel" class="mt-1 w-full rounded-lg border border-line bg-snow px-4 py-3 font-normal smooth">
+        </label>
+        <label class="block text-sm font-medium">Subject *
+          <input type="text" required class="mt-1 w-full rounded-lg border border-line bg-snow px-4 py-3 font-normal smooth">
+        </label>
+        <label class="block text-sm font-medium sm:col-span-2">Message *
+          <textarea rows="4" required class="mt-1 w-full rounded-lg border border-line bg-snow px-4 py-3 font-normal smooth"></textarea>
+        </label>
+
+        <!-- Hidden trap field for bots. Replaces the old math question -->
+        <div class="hidden" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+
+        <div class="sm:col-span-2 flex flex-wrap items-center gap-4">
+          <button type="submit" class="bg-brand text-white font-semibold px-6 py-3 rounded-full hover:bg-deep smooth">Send Message</button>
+          <p id="form-message" class="text-sm text-muted" role="status"></p>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer id="site-footer" class="bg-deep text-white"></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

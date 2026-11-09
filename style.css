@@ -1,0 +1,76 @@
+/* Colors taken from the school logo (blue crest and blue lettering).
+   Tailwind reads these through tailwind-config.js */
+:root {
+  --snow: #f7f9fd;      /* page background */
+  --surface: #ffffff;   /* cards, form fields */
+  --ink: #14203a;       /* main text */
+  --muted: #4a5a78;     /* secondary text */
+  --line: #d9e1f0;      /* borders */
+  --glacier: #eaf0fb;   /* very light blue */
+  --brand: #123080;     /* logo blue */
+  --deep: #0b1f5c;      /* darker blue */
+  --shadow: 0 1px 2px rgba(18, 48, 128, .06), 0 8px 24px rgba(18, 48, 128, .08), 0 24px 48px rgba(18, 48, 128, .06);
+}
+
+html { scroll-behavior: smooth; }
+
+/* Use .smooth on anything clickable */
+.smooth { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* Soft layered shadow */
+.lift { box-shadow: var(--shadow); }
+
+/* Keyboard focus ring */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+}
+
+/* The only page-load animation: hero text rises in */
+.rise { animation: rise 0.7s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.rise-2 { animation-delay: 0.12s; }
+.rise-3 { animation-delay: 0.24s; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Respect people who turn animations off */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise { animation: none; }
+  .smooth { transition: none; }
+}
+
+/* ---------- Hero slider ---------- */
+/* Every slide sits on top of the others. Only .is-active is visible. */
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slide.is-active { opacity: 1; pointer-events: auto; }
+
+/* Dark blue layer on the photo so white text is easy to read */
+.slide-shade { background: rgba(11, 31, 92, 0.72); }
+@media (min-width: 1024px) {
+  .slide-shade {
+    background: linear-gradient(90deg, rgba(11, 31, 92, 0.9) 0%, rgba(11, 31, 92, 0.7) 45%, rgba(11, 31, 92, 0.05) 100%);
+  }
+}
+
+/* Dots. The active one is longer. */
+.dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dot[aria-current="true"] { width: 2rem; background: #ffffff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slide, .dot { transition: none; }
+}
