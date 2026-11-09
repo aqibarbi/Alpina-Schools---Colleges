@@ -173,27 +173,93 @@ if (form) {
 }
 
 // 7. Inner page (page.html?id=85). Title comes from the menu list above.
+// The page content comes from pages.js (pageContent[id]).
 const pageBody = document.getElementById('page-body');
 if (pageBody) {
   const id = new URLSearchParams(window.location.search).get('id');
   let title = 'Page not found';
+  let groupName = '';
+  const labels = {}; // page id -> label, used by 'links' blocks
   menu.forEach(function (group) {
     group.links.forEach(function (link) {
-      if (String(link[0]) === id) title = link[1];
+      labels[link[0]] = link[1];
+      if (String(link[0]) === id) { title = link[1]; groupName = group.name; }
     });
   });
   document.title = title + ' | Alpina Schools & Colleges';
   document.getElementById('page-title').textContent = title;
+  if (groupName) document.getElementById('page-group').textContent = ' › ' + groupName;
 
-  // Add page text here. Example: pageText[85] = ['First paragraph', 'Second paragraph'];
-  const pageText = {};
-  const paragraphs = pageText[id] || ['Page content goes here. Copy it from https://alpina.edu.pk/page.php?id=' + id];
+  // Make one element with classes and text
+  function make(tag, classes, text) {
+    const element = document.createElement(tag);
+    element.className = classes;
+    if (text !== undefined) element.textContent = text;
+    return element;
+  }
 
-  paragraphs.forEach(function (text) {
-    const p = document.createElement('p');
-    p.textContent = text;
-    pageBody.appendChild(p);
-  });
+  // Turn one content block (see pages.js) into an element
+  function renderBlock(block) {
+    if (typeof block === 'string') {
+      return make('p', 'text-lg leading-8 text-muted max-w-prose', block);
+    }
+
+    if (block.type === 'quote') {
+      return make('p', 'border-l-4 border-brand pl-5 sm:pl-6 font-display font-semibold text-2xl sm:text-3xl leading-snug text-brand', block.text);
+    }
+
+    if (block.type === 'heading') {
+      return make('h2', 'pt-4 font-display font-semibold text-2xl tracking-tight text-brand', block.text);
+    }
+
+    if (block.type === 'list') {
+      const list = make('ul', 'list-disc pl-6 space-y-2 text-lg leading-8 text-muted max-w-prose');
+      block.items.forEach(function (text) { list.appendChild(make('li', '', text)); });
+      return list;
+    }
+
+    if (block.type === 'tiles') {
+      const grid = make('ul', 'grid sm:grid-cols-2 gap-4');
+      block.items.forEach(function (item) {
+        const tile = make('li', 'bg-glacier rounded-xl p-5');
+        tile.appendChild(make('p', 'font-display font-semibold text-lg text-brand', item[0]));
+        tile.appendChild(make('p', 'mt-1 text-muted leading-7', item[1]));
+        grid.appendChild(tile);
+      });
+      return grid;
+    }
+
+    if (block.type === 'links') {
+      const grid = make('ul', 'grid sm:grid-cols-2 gap-4');
+      block.ids.forEach(function (linkId) {
+        const item = make('li', '');
+        const link = make('a', 'block h-full border-l-4 border-brand bg-surface px-5 py-4 font-display font-semibold hover:bg-glacier smooth', labels[linkId] || 'Page ' + linkId);
+        link.href = 'page.html?id=' + linkId;
+        item.appendChild(link);
+        grid.appendChild(item);
+      });
+      return grid;
+    }
+
+    if (block.type === 'letter') {
+      const card = make('div', 'bg-surface border border-line rounded-2xl p-6 sm:p-10 lift');
+      card.appendChild(make('p', 'font-display font-semibold text-xl', block.greeting));
+      block.paragraphs.forEach(function (text) {
+        card.appendChild(make('p', 'mt-5 text-lg leading-8 text-muted', text));
+      });
+      card.appendChild(make('p', 'mt-8 text-muted', block.closing));
+      card.appendChild(make('p', 'mt-1 font-display font-semibold text-brand', block.from[0]));
+      card.appendChild(make('p', 'text-sm text-muted', block.from[1]));
+      return card;
+    }
+
+    return make('p', 'text-muted', ''); // unknown block type: show nothing
+  }
+
+  // pages.js may be missing, so check before using it
+  const blocks = (typeof pageContent !== 'undefined' && pageContent[id]) ||
+    ['Page content goes here. Copy it from https://alpina.edu.pk/page.php?id=' + id];
+  blocks.forEach(function (block) { pageBody.appendChild(renderBlock(block)); });
 }
 
 // 8. Hero slider (home page only)
