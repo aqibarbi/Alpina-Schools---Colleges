@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Title | Alpina Schools &amp; Colleges</title>
+  <meta name="description" content="One sentence about this page for Google.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="tailwind-config.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-snow text-ink font-body antialiased">
+
+  <!--
+    TEMPLATE for a new page.
+    1. Copy this file and rename it, e.g. vision-mission-and-values.html
+    2. Change: <title>, meta description, "Home > Section", the h1, and the content blocks.
+    3. Delete the blocks you do not need.
+    4. In script.js, add the file name as the 3rd item of the page in the menu list,
+       e.g. [100, 'Vision, Mission and Values', 'vision-mission-and-values.html']
+    5. In other pages, point links to this file instead of page.html?id=...
+  -->
+
+  <div id="top-strip" class="hidden md:block bg-brand text-white text-xs"></div>
+  <header id="site-header" class="sticky top-0 z-40"></header>
+
+  <main>
+    <!-- Title bar -->
+    <section class="relative bg-glacier overflow-hidden">
+      <div class="max-w-6xl mx-auto px-6 pt-10 pb-16 sm:pt-14 sm:pb-20">
+        <p class="text-sm text-muted"><a href="index.html" class="hover:underline">Home</a> &rsaquo; Section Name</p>
+        <h1 class="mt-3 font-display font-semibold text-3xl sm:text-4xl lg:text-5xl tracking-tight break-words">Page Title</h1>
+      </div>
+      <!-- Ridge, same shape family as the home slider. Joins the page background -->
+      <svg class="absolute bottom-0 left-0 w-full h-6 sm:h-10 pointer-events-none" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+        <path style="fill: var(--snow)" d="M0 80V50L180 15 300 45 470 5 650 48 820 22 1010 52 1200 12 1330 40 1440 25V80Z"/>
+      </svg>
+    </section>
+
+    <!-- Page content on the left, contact box on the right -->
+    <section class="max-w-6xl mx-auto px-6 pt-6 pb-16 grid lg:grid-cols-12 gap-12">
+      <article class="lg:col-span-8 space-y-6">
+
+        <p class="text-lg leading-8 text-muted max-w-prose">A normal paragraph.</p>
+
+        <h2 class="pt-4 font-display font-semibold text-2xl tracking-tight text-brand">A section heading</h2>
+
+        <!-- Pull quote -->
+        <p class="border-l-4 border-brand pl-5 sm:pl-6 font-display font-semibold text-2xl sm:text-3xl leading-snug text-brand">A big pull quote.</p>
+
+        <!-- Bullet list -->
+        <ul class="list-disc pl-6 space-y-2 text-lg leading-8 text-muted max-w-prose">
+          <li>First point</li>
+          <li>Second point</li>
+          <li>Third point</li>
+        </ul>
+
+        <!-- Stats strip -->
+        <ul class="grid grid-cols-2 sm:grid-cols-4 gap-6 bg-brand text-white rounded-2xl p-6 sm:p-8">
+          <li>
+            <p class="font-display font-semibold text-2xl sm:text-3xl">1983</p>
+            <p class="mt-1 text-sm text-white/80">Founded</p>
+          </li>
+          <li>
+            <p class="font-display font-semibold text-2xl sm:text-3xl">12</p>
+            <p class="mt-1 text-sm text-white/80">Campuses</p>
+          </li>
+          <li>
+            <p class="font-display font-semibold text-2xl sm:text-3xl">30,000+</p>
+            <p class="mt-1 text-sm text-white/80">Graduates</p>
+          </li>
+          <li>
+            <p class="font-display font-semibold text-2xl sm:text-3xl">21</p>
+            <p class="mt-1 text-sm text-white/80">Class size</p>
+          </li>
+        </ul>
+
+        <!-- Info cards -->
+        <ul class="grid sm:grid-cols-2 gap-4">
+          <li class="bg-glacier rounded-xl p-5">
+            <p class="font-display font-semibold text-lg text-brand">Card title</p>
+            <p class="mt-1 text-muted leading-7">Short card text.</p>
+          </li>
+          <li class="bg-glacier rounded-xl p-5">
+            <p class="font-display font-semibold text-lg text-brand">Card title</p>
+            <p class="mt-1 text-muted leading-7">Short card text.</p>
+          </li>
+        </ul>
+
+        <h2 class="pt-4 font-display font-semibold text-2xl tracking-tight text-brand">Continue exploring</h2>
+
+        <!-- Link cards -->
+        <ul class="grid sm:grid-cols-2 gap-4">
+          <li><a href="welcome-to-alpina.html" class="block h-full border-l-4 border-brand bg-surface px-5 py-4 font-display font-semibold hover:bg-glacier smooth">Welcome to Alpina</a></li>
+          <li><a href="our-history-and-legacy.html" class="block h-full border-l-4 border-brand bg-surface px-5 py-4 font-display font-semibold hover:bg-glacier smooth">Our History and Legacy</a></li>
+        </ul>
+
+      </article>
+
+      <aside class="lg:col-span-4 self-start lg:sticky lg:top-24 bg-surface border border-line rounded-2xl p-6 lift">
+        <h2 class="font-display font-semibold text-lg">Have a question?</h2>
+        <p class="mt-2 text-muted">Call the school office or send a message.</p>
+        <a href="tel:+92622874852" class="block mt-4 font-medium hover:underline">+92 62 2874852</a>
+        <a href="index.html#contact" class="inline-block mt-5 bg-brand text-white font-semibold px-5 py-2.5 rounded-full hover:brightness-95 smooth">Contact us</a>
+      </aside>
+    </section>
+  </main>
+
+  <footer id="site-footer" class="bg-deep text-white"></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

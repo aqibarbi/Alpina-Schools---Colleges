@@ -1,10 +1,12 @@
 // Alpina redesign. Plain JavaScript, no libraries.
 
-// 1. Menu data. Each group has a name and a list of [page id, label].
+// 1. Menu data. Each group has a name and a list of [page id, label, file name].
 // The ids match the old site, e.g. https://alpina.edu.pk/page.php?id=85
+// The file name is only for pages that are built (their own .html file).
+// Pages without a file name open the placeholder page.html?id=...
 const menu = [
   { name: 'About', links: [
-    [85, 'Welcome to Alpina'], [102, 'Our History and Legacy'], [100, 'Vision, Mission and Values'],
+    [85, 'Welcome to Alpina', 'welcome-to-alpina.html'], [102, 'Our History and Legacy', 'our-history-and-legacy.html'], [100, 'Vision, Mission and Values'],
     [89, 'School Objectives'], [80, 'The Alpina Profile'], [81, 'The School Insignia and Identity'],
     [97, 'Corporate Social Responsibility'], [98, 'Recent Honours and Awards'] ] },
   { name: 'Academics', links: [
@@ -28,7 +30,11 @@ const menu = [
     [116, 'Office Hours'], [117, 'Enquiries'] ] }
 ];
 
-// 2. Header. Built here so both pages share the same menu.
+// 2. Header. Built here so every page shares the same menu.
+function pageUrl(link) {
+  return link[2] || 'page.html?id=' + link[0];
+}
+
 function buildHeader() {
   let desktop = '';
   let mobile = '';
@@ -36,7 +42,7 @@ function buildHeader() {
   menu.forEach(function (group, index) {
     let items = '';
     group.links.forEach(function (link) {
-      items += '<a href="page.html?id=' + link[0] + '" class="block px-4 py-2 text-sm hover:bg-glacier smooth">' + link[1] + '</a>';
+      items += '<a href="' + pageUrl(link) + '" class="block px-4 py-2 text-sm hover:bg-glacier smooth">' + link[1] + '</a>';
     });
 
     // The last two dropdowns open to the left so they stay on screen
@@ -172,94 +178,31 @@ if (form) {
   });
 }
 
-// 7. Inner page (page.html?id=85). Title comes from the menu list above.
-// The page content comes from pages.js (pageContent[id]).
+// 7. Placeholder page (page.html?id=100). Pages that are not built yet open here.
+// Built pages have their own .html file (3rd item in the menu list above).
 const pageBody = document.getElementById('page-body');
 if (pageBody) {
   const id = new URLSearchParams(window.location.search).get('id');
   let title = 'Page not found';
   let groupName = '';
-  const labels = {}; // page id -> label, used by 'links' blocks
+  let file = '';
   menu.forEach(function (group) {
     group.links.forEach(function (link) {
-      labels[link[0]] = link[1];
-      if (String(link[0]) === id) { title = link[1]; groupName = group.name; }
+      if (String(link[0]) === id) { title = link[1]; groupName = group.name; file = link[2] || ''; }
     });
   });
+
+  // Old links like page.html?id=85 jump to the built page
+  if (file) window.location.replace(file);
+
   document.title = title + ' | Alpina Schools & Colleges';
   document.getElementById('page-title').textContent = title;
-  if (groupName) document.getElementById('page-group').textContent = ' › ' + groupName;
+  if (groupName) document.getElementById('page-group').textContent = ' \u203a ' + groupName;
 
-  // Make one element with classes and text
-  function make(tag, classes, text) {
-    const element = document.createElement(tag);
-    element.className = classes;
-    if (text !== undefined) element.textContent = text;
-    return element;
-  }
-
-  // Turn one content block (see pages.js) into an element
-  function renderBlock(block) {
-    if (typeof block === 'string') {
-      return make('p', 'text-lg leading-8 text-muted max-w-prose', block);
-    }
-
-    if (block.type === 'quote') {
-      return make('p', 'border-l-4 border-brand pl-5 sm:pl-6 font-display font-semibold text-2xl sm:text-3xl leading-snug text-brand', block.text);
-    }
-
-    if (block.type === 'heading') {
-      return make('h2', 'pt-4 font-display font-semibold text-2xl tracking-tight text-brand', block.text);
-    }
-
-    if (block.type === 'list') {
-      const list = make('ul', 'list-disc pl-6 space-y-2 text-lg leading-8 text-muted max-w-prose');
-      block.items.forEach(function (text) { list.appendChild(make('li', '', text)); });
-      return list;
-    }
-
-    if (block.type === 'tiles') {
-      const grid = make('ul', 'grid sm:grid-cols-2 gap-4');
-      block.items.forEach(function (item) {
-        const tile = make('li', 'bg-glacier rounded-xl p-5');
-        tile.appendChild(make('p', 'font-display font-semibold text-lg text-brand', item[0]));
-        tile.appendChild(make('p', 'mt-1 text-muted leading-7', item[1]));
-        grid.appendChild(tile);
-      });
-      return grid;
-    }
-
-    if (block.type === 'links') {
-      const grid = make('ul', 'grid sm:grid-cols-2 gap-4');
-      block.ids.forEach(function (linkId) {
-        const item = make('li', '');
-        const link = make('a', 'block h-full border-l-4 border-brand bg-surface px-5 py-4 font-display font-semibold hover:bg-glacier smooth', labels[linkId] || 'Page ' + linkId);
-        link.href = 'page.html?id=' + linkId;
-        item.appendChild(link);
-        grid.appendChild(item);
-      });
-      return grid;
-    }
-
-    if (block.type === 'letter') {
-      const card = make('div', 'bg-surface border border-line rounded-2xl p-6 sm:p-10 lift');
-      card.appendChild(make('p', 'font-display font-semibold text-xl', block.greeting));
-      block.paragraphs.forEach(function (text) {
-        card.appendChild(make('p', 'mt-5 text-lg leading-8 text-muted', text));
-      });
-      card.appendChild(make('p', 'mt-8 text-muted', block.closing));
-      card.appendChild(make('p', 'mt-1 font-display font-semibold text-brand', block.from[0]));
-      card.appendChild(make('p', 'text-sm text-muted', block.from[1]));
-      return card;
-    }
-
-    return make('p', 'text-muted', ''); // unknown block type: show nothing
-  }
-
-  // pages.js may be missing, so check before using it
-  const blocks = (typeof pageContent !== 'undefined' && pageContent[id]) ||
-    ['Page content goes here. Copy it from https://alpina.edu.pk/page.php?id=' + id];
-  blocks.forEach(function (block) { pageBody.appendChild(renderBlock(block)); });
+  const note = document.createElement('p');
+  note.className = 'text-lg leading-8 text-muted max-w-prose';
+  note.textContent = 'Page content goes here. Copy it from https://alpina.edu.pk/page.php?id=' + id;
+  pageBody.appendChild(note);
 }
 
 // 8. Hero slider (home page only)
