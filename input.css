@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Colors taken from the school logo (blue crest and blue lettering).
    Tailwind reads these through tailwind-config.js */
 :root {
@@ -21,7 +25,7 @@ html { scroll-behavior: smooth; }
 .lift { box-shadow: var(--shadow); }
 
 /* Keyboard focus ring */
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible {
   outline: 3px solid var(--brand);
   outline-offset: 3px;
 }
@@ -74,3 +78,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 @media (prefers-reduced-motion: reduce) {
   .slide, .dot { transition: none; }
 }
+
+/* ---------- Added: accessibility, dropdowns, skip link ---------- */
+[id] { scroll-margin-top: 6rem; }
+.smooth:active { transform: scale(.98); }
+.skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 100; background: #fff; color: var(--brand); padding: .75rem 1.25rem; border-radius: 9999px; font-weight: 600; transition: top .2s; }
+.skip-link:focus { top: 1rem; }
+/* Focus ring turns white on dark surfaces */
+footer a:focus-visible, footer button:focus-visible, #top-strip a:focus-visible, #slider a:focus-visible, #slider button:focus-visible { outline-color: #fff; }
+/* Bigger tap area for slider dots */
+.dot { position: relative; }
+.dot::after { content: ""; position: absolute; inset: -8px -4px; }
+/* Desktop dropdown: opens on hover, click, Enter or Space */
+.dd-panel { visibility: hidden; opacity: 0; transform: translateY(6px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.dd.is-open .dd-panel { visibility: visible; opacity: 1; transform: none; }
+@media (hover: hover) { .dd:hover .dd-panel { visibility: visible; opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .dd-panel, .skip-link { transition: none; } }

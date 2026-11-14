@@ -6,33 +6,33 @@
 // Pages without a file name open the placeholder page.html?id=...
 const menu = [
   { name: 'About', links: [
-    [85, 'Welcome to Alpina', 'welcome-to-alpina.html'], [102, 'Our History and Legacy', 'our-history-and-legacy.html'], [100, 'Vision, Mission and Values'],
-    [89, 'School Objectives'], [80, 'The Alpina Profile'], [81, 'The School Insignia and Identity'],
-    [97, 'Corporate Social Responsibility'], [98, 'Recent Honours and Awards'] ] },
+    [85, 'Welcome to Alpina', 'welcome-to-alpina.html'], [102, 'Our History and Legacy', 'our-history-and-legacy.html'], [100, 'Vision, Mission and Values', 'vision-mission-and-values.html'],
+    [89, 'School Objectives', 'school-objectives.html'], [80, 'The Alpina Profile', 'the-alpina-profile.html'], [81, 'The School Insignia and Identity', 'the-school-insignia-and-identity.html'],
+    [97, 'Corporate Social Responsibility', 'corporate-social-responsibility.html'], [98, 'Recent Honours and Awards', 'recent-honours-and-awards.html'] ] },
   { name: 'Academics', links: [
-    [103, 'Academic Philosophy'], [104, 'Pre-Primary Programme'], [105, 'Primary and Middle School'],
-    [106, 'Secondary School'], [95, 'GCE O Level Programme'], [96, 'BISE Matriculation and Intermediate'],
-    [90, 'Faculty and Academic Leadership'], [107, 'Digital Learning and Information Technology'] ] },
+    [103, 'Academic Philosophy', 'academic-philosophy.html'], [104, 'Pre-Primary Programme', 'pre-primary-programme.html'], [105, 'Primary and Middle School', 'primary-and-middle-school.html'],
+    [106, 'Secondary School', 'secondary-school.html'], [95, 'GCE O Level Programme', 'gce-o-level-programme.html'], [96, 'BISE Matriculation and Intermediate', 'bise-matriculation-and-intermediate.html'],
+    [90, 'Faculty and Academic Leadership', 'faculty-and-academic-leadership.html'], [107, 'Digital Learning and Information Technology', 'digital-learning-and-information-technology.html'] ] },
   { name: 'Admission', links: [
-    [53, 'Admission Process'], [66, 'Fee Schedule'], [59, 'Fee Concessions and Scholarships'],
-    [92, 'Teaching Times and Academic Calendar'], [82, 'School Books and Uniform Guidelines'],
-    [119, 'Admission Guideline'] ] },
+    [53, 'Admission Process', 'admission-process.html'], [66, 'Fee Schedule', 'fee-schedule.html'], [59, 'Fee Concessions and Scholarships', 'fee-concessions-and-scholarships.html'],
+    [92, 'Teaching Times and Academic Calendar', 'teaching-times-and-academic-calendar.html'], [82, 'School Books and Uniform Guidelines', 'school-books-and-uniform-guidelines.html'],
+    [119, 'Admission Guideline', 'admission-guideline.html'] ] },
   { name: 'Student Life', links: [
-    [108, 'Facilities and Campus Life'], [109, 'Co-Curricular and Extracurricular Activities'],
-    [110, 'Sports and Physical Education'], [111, 'Arts, Music and School Band'],
-    [112, 'Expeditions, Trips and Picnics'], [99, 'Parental Involvement'] ] },
+    [108, 'Facilities and Campus Life', 'facilities-and-campus-life.html'], [109, 'Co-Curricular and Extracurricular Activities', 'co-curricular-and-extracurricular-activities.html'],
+    [110, 'Sports and Physical Education', 'sports-and-physical-education.html'], [111, 'Arts, Music and School Band', 'arts-music-and-school-band.html'],
+    [112, 'Expeditions, Trips and Picnics', 'expeditions-trips-and-picnics.html'], [99, 'Parental Involvement', 'parental-involvement.html'] ] },
   { name: 'Governance', links: [
-    [75, 'Message from the Directors'], [77, 'Message from Pre-Primary Directress'],
-    [113, 'Academic Leadership'], [88, 'School Administration'],
-    [101, 'School Policies and Regulations'], [118, 'Faculty and Employment'] ] },
+    [75, 'Message from the Directors', 'message-from-the-directors.html'], [77, 'Message from Pre-Primary Directress', 'message-from-pre-primary-directress.html'],
+    [113, 'Academic Leadership', 'academic-leadership.html'], [88, 'School Administration', 'school-administration.html'],
+    [101, 'School Policies and Regulations', 'school-policies-and-regulations.html'], [118, 'Faculty and Employment', 'faculty-and-employment.html'] ] },
   { name: 'Contact', links: [
-    [86, 'Contact Us'], [114, 'Head Office'], [115, 'Campus Locations'],
-    [116, 'Office Hours'], [117, 'Enquiries'] ] }
+    [86, 'Contact Us', 'contact-us.html'], [114, 'Head Office', 'head-office.html'], [115, 'Campus Locations', 'campus-locations.html'],
+    [116, 'Office Hours', 'office-hours.html'], [117, 'Enquiries', 'enquiries.html'] ] }
 ];
 
 // 2. Header. Built here so every page shares the same menu.
 function pageUrl(link) {
-  return link[2] || 'page.html?id=' + link[0];
+  return link[2];
 }
 
 function buildHeader() {
@@ -42,16 +42,16 @@ function buildHeader() {
   menu.forEach(function (group, index) {
     let items = '';
     group.links.forEach(function (link) {
-      items += '<a href="' + pageUrl(link) + '" class="block px-4 py-2 text-sm hover:bg-glacier smooth">' + link[1] + '</a>';
+      items += '<a href="' + pageUrl(link) + '" class="block px-4 py-2.5 text-sm hover:bg-glacier smooth">' + link[1] + '</a>';
     });
 
     // The last two dropdowns open to the left so they stay on screen
     const side = index >= menu.length - 2 ? 'right-0' : 'left-0';
 
     // Desktop: dropdown opens on hover or keyboard focus
-    desktop += '<div class="relative group">' +
-      '<button class="px-3 py-2 text-sm font-medium rounded-lg hover:bg-glacier smooth" aria-haspopup="true">' + group.name + '</button>' +
-      '<div class="absolute ' + side + ' top-full hidden group-hover:block group-focus-within:block w-72 bg-surface border border-line rounded-xl py-2 lift z-50">' + items + '</div>' +
+    desktop += '<div class="relative dd">' +
+      '<button class="px-3 py-2 text-sm font-medium rounded-lg hover:bg-glacier smooth" aria-haspopup="true" aria-expanded="false">' + group.name + '</button>' +
+      '<div class="absolute ' + side + ' top-full dd-panel w-72 bg-surface border border-line rounded-2xl py-2 lift z-50">' + items + '</div>' +
       '</div>';
 
     // Mobile: each group opens and closes, so the menu stays short
@@ -65,11 +65,11 @@ function buildHeader() {
       '<div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">' +
         '<a href="index.html" class="shrink-0"><img src="logo.png" alt="Alpina School &amp; Colleges" class="h-7 sm:h-10 w-auto"></a>' +
         '<nav class="hidden lg:flex items-center gap-1" aria-label="Main">' + desktop + '</nav>' +
-        '<a href="tel:+92622874852" class="hidden xl:block text-sm"><span class="text-muted">Call Our Experts</span> <span class="font-semibold">+92 62 2874852</span></a>' +
+        '<a href="admission-process.html" class="hidden lg:inline-flex shrink-0 bg-brand text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-deep smooth">Admissions</a>' +
         '<button id="menu-button" class="lg:hidden px-4 py-2 border border-line rounded-full text-sm font-medium" aria-expanded="false" aria-controls="mobile-menu">Menu</button>' +
       '</div>' +
       // If the open menu is taller than the screen, it scrolls inside itself
-      '<div id="mobile-menu" class="hidden lg:hidden px-6 pb-6 max-h-[75vh] overflow-y-auto">' + mobile +
+      '<div id="mobile-menu" class="hidden lg:hidden px-6 pb-6 max-h-[75vh] overflow-y-auto">' + '<a href="admission-process.html" class="block mt-2 mb-4 text-center bg-brand text-white font-semibold px-5 py-3 rounded-full">Admissions</a>' + mobile +
         '<p class="pt-4 border-t border-line text-sm">Call Our Experts <a href="tel:+92622874852" class="font-semibold">+92 62 2874852</a></p></div>' +
     '</div>';
 }
@@ -77,8 +77,8 @@ function buildHeader() {
 // Thin blue bar above the header. It scrolls away, only the white bar stays on top.
 function buildTopStrip() {
   return '<div class="max-w-6xl mx-auto px-6 py-2 flex justify-between gap-6">' +
-    '<span>16-B, Mohammad Hussain Road, Model Town A, Bahawalpur, PAKISTAN</span>' +
-    '<span><a href="mailto:info@alpina.edu.pk" class="hover:underline">info@alpina.edu.pk</a> &nbsp; <a href="https://www.facebook.com/alpinaschools" class="hover:underline">Facebook</a></span>' +
+    '<span>16-B, Muhammad Hussain Road, Model Town A, Bahawalpur, PAKISTAN</span>' +
+    '<span><a href="tel:+92622874852" class="hover:underline">+92 62 2874852</a> &nbsp; <a href="mailto:info@alpina.edu.pk" class="hover:underline">info@alpina.edu.pk</a> &nbsp; <a href="https://www.facebook.com/alpinaschools" class="hover:underline">Facebook</a></span>' +
     '</div>';
 }
 
@@ -90,21 +90,21 @@ function buildFooter() {
         '<p class="font-display font-semibold text-2xl leading-snug max-w-xs">Bringing out the best in every child</p>' +
         '<p class="mt-6 font-display font-semibold">Contact Info</p>' +
         '<dl class="mt-3 space-y-3 text-white/70">' +
-          '<div><dt class="font-medium text-white">Address</dt><dd>16-B, Mohammad Hussain Road, Model Town A, Bahawalpur, PAKISTAN</dd></div>' +
+          '<div><dt class="font-medium text-white">Address</dt><dd>16-B, Muhammad Hussain Road, Model Town A, Bahawalpur, PAKISTAN</dd></div>' +
           '<div><dt class="font-medium text-white">Mail Us</dt><dd><a class="hover:underline" href="mailto:info@alpina.edu.pk">info@alpina.edu.pk</a></dd></div>' +
           '<div><dt class="font-medium text-white">Telephone</dt><dd><a class="hover:underline" href="tel:+92622874852">+92 62 2874852</a></dd></div>' +
         '</dl></div>' +
       '<div class="lg:col-span-3"><p class="font-display font-semibold">Quick Links</p>' +
         '<ul class="mt-3 grid grid-cols-2 gap-x-6 gap-y-2 text-white/70">' +
-          '<li><a class="hover:underline" href="page.html?id=80">About Us</a></li>' +
-          '<li><a class="hover:underline" href="page.html?id=80">Features</a></li>' +
+          '<li><a class="hover:underline" href="the-alpina-profile.html">About Us</a></li>' +
+          '<li><a class="hover:underline" href="fee-schedule.html">Fee Schedule</a></li>' +
           '<li><a class="hover:underline" href="testimonials.html">Testimonials</a></li>' +
           '<li><a class="hover:underline" href="faqs.html">FAQ\'s</a></li>' +
           '<li><a class="hover:underline" href="news.html">News</a></li>' +
-          '<li><a class="hover:underline" href="page.html?id=86">Contact</a></li>' +
-          '<li><a class="hover:underline" href="page.html?id=118">Careers at Alpina</a></li></ul></div>' +
+          '<li><a class="hover:underline" href="contact-us.html">Contact</a></li>' +
+          '<li><a class="hover:underline" href="faculty-and-employment.html">Careers at Alpina</a></li></ul></div>' +
       '<div class="lg:col-span-4"><p class="font-display font-semibold">Live Feed</p>' +
-        '<div id="feed-box" class="mt-3 rounded-xl border border-white/20 p-5">' +
+        '<div id="feed-box" class="mt-3 rounded-2xl border border-white/20 p-5">' +
           '<p class="text-white/70">Alpina Schools on Facebook</p>' +
           '<div class="mt-4 flex flex-wrap gap-3">' +
             '<button id="feed-button" class="bg-white text-brand font-semibold px-5 py-2.5 rounded-full hover:bg-glacier smooth">Show Live Feed</button>' +
@@ -112,7 +112,7 @@ function buildFooter() {
           '</div></div></div>' +
     '</div>' +
     '<div class="border-t border-white/10"><p class="max-w-6xl mx-auto px-6 py-5 text-xs text-white/60">' +
-      '&copy; ' + new Date().getFullYear() + ' Alpina Schools &amp; Colleges. All Rights Reserved. Redesign concept for practice, not the official site.</p></div>';
+      '&copy; ' + new Date().getFullYear() + ' Alpina Schools &amp; Colleges. All Rights Reserved. Redesign concept for practice, not the official site. Designed by <a href="https://portfolio-muhammad-aqibjaved.netlify.app" class="underline hover:text-white">Muhammad Aqib Javed</a>.</p></div>';
 }
 
 // Put header and footer on the page
@@ -142,12 +142,12 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 function countUp(element) {
   const target = Number(element.dataset.count);
-  if (reduceMotion) { element.textContent = target; return; }
+  if (reduceMotion) { element.textContent = target.toLocaleString('en-US'); return; }
   const startTime = performance.now();
   const duration = 1200; // milliseconds
   function step(now) {
     const progress = Math.min((now - startTime) / duration, 1);
-    element.textContent = Math.round(target * progress);
+    element.textContent = Math.round(target * progress).toLocaleString('en-US');
     if (progress < 1) requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
@@ -171,38 +171,18 @@ if (form) {
     event.preventDefault();
     // Bots fill the hidden "website" field, real people do not
     if (form.elements['website'].value !== '') return;
-    // TODO: send the form data to Formspree or Netlify Forms here
     const note = document.getElementById('form-message');
-    note.textContent = 'Message sent. The school office will reply by email or phone.';
-    form.reset();
+    note.textContent = 'Sending...';
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
+      .then(function (response) {
+        if (!response.ok) throw new Error('Request failed');
+        note.textContent = 'Message sent. The school office will reply by email or phone.';
+        form.reset();
+      })
+      .catch(function () {
+        note.textContent = 'Could not send. Please call +92 62 2874852 or email info@alpina.edu.pk.';
+      });
   });
-}
-
-// 7. Placeholder page (page.html?id=100). Pages that are not built yet open here.
-// Built pages have their own .html file (3rd item in the menu list above).
-const pageBody = document.getElementById('page-body');
-if (pageBody) {
-  const id = new URLSearchParams(window.location.search).get('id');
-  let title = 'Page not found';
-  let groupName = '';
-  let file = '';
-  menu.forEach(function (group) {
-    group.links.forEach(function (link) {
-      if (String(link[0]) === id) { title = link[1]; groupName = group.name; file = link[2] || ''; }
-    });
-  });
-
-  // Old links like page.html?id=85 jump to the built page
-  if (file) window.location.replace(file);
-
-  document.title = title + ' | Alpina Schools & Colleges';
-  document.getElementById('page-title').textContent = title;
-  if (groupName) document.getElementById('page-group').textContent = ' \u203a ' + groupName;
-
-  const note = document.createElement('p');
-  note.className = 'text-lg leading-8 text-muted max-w-prose';
-  note.textContent = 'Page content goes here. Copy it from https://alpina.edu.pk/page.php?id=' + id;
-  pageBody.appendChild(note);
 }
 
 // 8. Hero slider (home page only)
@@ -269,4 +249,64 @@ if (slider) {
   showSlide(0);
   updatePauseButton();
   startTimer();
+}
+
+// 9. Dropdowns: click toggles, Esc and outside click close
+const dropdowns = document.querySelectorAll('.dd');
+function closeDropdowns(except) {
+  dropdowns.forEach(function (dd) {
+    if (dd === except) return;
+    dd.classList.remove('is-open');
+    dd.querySelector('button').setAttribute('aria-expanded', 'false');
+  });
+}
+dropdowns.forEach(function (dd) {
+  const button = dd.querySelector('button');
+  button.addEventListener('click', function (event) {
+    event.stopPropagation();
+    const open = dd.classList.toggle('is-open');
+    button.setAttribute('aria-expanded', String(open));
+    closeDropdowns(dd);
+  });
+});
+document.addEventListener('click', function () { closeDropdowns(); });
+document.addEventListener('keydown', function (event) { if (event.key === 'Escape') closeDropdowns(); });
+
+// 10. Section menu in the sidebar of inner pages (same group as the current page)
+let here = window.location.pathname.split('/').pop() || 'index.html';
+if (here.indexOf('.') === -1) here += '.html';
+const sidebar = document.querySelector('main aside');
+const currentGroup = menu.find(function (group) {
+  return group.links.some(function (link) { return link[2] === here; });
+});
+if (sidebar && currentGroup) {
+  let list = '';
+  currentGroup.links.forEach(function (link) {
+    const on = link[2] === here;
+    list += '<li><a href="' + link[2] + '"' + (on ? ' aria-current="page"' : '') + ' class="block rounded-lg px-3 py-2 text-sm smooth ' + (on ? 'bg-glacier font-semibold text-brand' : 'hover:bg-glacier') + '">' + link[1] + '</a></li>';
+  });
+  sidebar.insertAdjacentHTML('afterbegin', '<nav aria-label="' + currentGroup.name + ' pages" class="mb-6 pb-6 border-b border-line"><p class="font-display font-semibold text-lg">' + currentGroup.name + '</p><ul class="mt-3 space-y-1">' + list + '</ul></nav>');
+}
+
+// 11. Mobile bar: call and admissions stay one tap away
+document.body.classList.add('pb-16', 'md:pb-0');
+document.body.insertAdjacentHTML('beforeend', '<div class="md:hidden fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-3 bg-surface border-t border-line p-3"><a href="tel:+92622874852" class="text-center rounded-full border border-line py-3 text-sm font-semibold smooth">Call</a><a href="admission-process.html" class="text-center rounded-full bg-brand text-white py-3 text-sm font-semibold smooth">Admissions</a></div>');
+
+// 12. Map loads only on click (same idea as the Facebook feed)
+const mapButton = document.getElementById('map-button');
+if (mapButton) {
+  mapButton.addEventListener('click', function () {
+    document.getElementById('map-box').innerHTML = '<iframe title="Alpina head office map" class="w-full h-80 rounded-xl border-0" loading="lazy" src="https://www.google.com/maps?q=16-B+Muhammad+Hussain+Road+Model+Town+A+Bahawalpur&output=embed"></iframe>';
+  });
+}
+
+// 13. Campus map: one iframe, loads on click, changes with the select
+const campusSelect = document.getElementById('campus-select');
+if (campusSelect) {
+  const frame = document.getElementById('campus-map-frame');
+  const showCampusMap = function () {
+    frame.innerHTML = '<iframe title="Campus map" class="w-full h-80 rounded-xl border-0" loading="lazy" src="https://www.google.com/maps?q=' + encodeURIComponent(campusSelect.value) + '&output=embed"></iframe>';
+  };
+  document.getElementById('campus-map-button').addEventListener('click', showCampusMap);
+  campusSelect.addEventListener('change', function () { if (frame.querySelector('iframe')) showCampusMap(); });
 }
